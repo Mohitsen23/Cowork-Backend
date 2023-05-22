@@ -79,7 +79,7 @@ public String getTOken(String username) {
 			.setClaims(claims)
 			.setSubject(username)
 			.setIssuedAt(new Date(System.currentTimeMillis()))
-			.setExpiration(new Date(System.currentTimeMillis()+ 300000))
+			.setExpiration(new Date(System.currentTimeMillis()+1000*60*10))
 			.signWith(getKey(),SignatureAlgorithm.HS256).compact();
 			
        }
@@ -102,6 +102,16 @@ Optional<Signup> sign=repo.findUserByEmail(username);
 		return sign;
 	}
 	
+	return null;
+}
+
+@Override
+public Signup getUser(String email) {
+	// TODO Auto-generated method stub
+	    Signup user=repo.findByEmail(email);
+	    if(user!=null) {
+	    	return user;
+	    }
 	return null;
 }
 }

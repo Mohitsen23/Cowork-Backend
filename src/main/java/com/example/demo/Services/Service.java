@@ -11,4 +11,6 @@ public interface Service {
 
 	Optional<Signup> getLogin(String username);
 
+	Signup getUser(String email);
+
 }

@@ -48,7 +48,7 @@ public class SecurityConfig {
 	 {
 		  return http.csrf().disable()
 							.authorizeHttpRequests()
-							.requestMatchers("/loginUser","/signup","/verify/{otp}").permitAll()
+							.requestMatchers("/loginUser","/data","/signup","/verify/{otp}","/getUser/{email}","/updatepassword").permitAll()
 							.and()
 							.authorizeHttpRequests()
 							.requestMatchers("/**").authenticated()

@@ -38,16 +38,16 @@ public class SignupController {
 
 	 boolean status =false;
      @PostMapping("/signup")
+     @CrossOrigin(origins = "http://localhost:4200")
 	public String signupDetails(@RequestBody SignupDTO sign){
+    	 value=null;
     	 Signup data= repo.findByEmail(sign.getEmail());
     	 System.out.println("data"+data);
     	 
     	 if(data==null) {  
     		 System.out.println("data"+data);
     	 value=email.sendEmailWithAttachMent(sign.getEmail());
-    	 
-    	
- 		obj.setFirstname(sign.getFirstname());
+    	obj.setFirstname(sign.getFirstname());
  		obj.setLastname(sign.getLastname());
  		obj.setEmail(sign.getEmail());
  		obj.setPassword(encoder.encode(sign.getPassword()));
@@ -59,13 +59,16 @@ public class SignupController {
     		 System.out.println(value);
     		return "OTP sent successfully";
     	 }
-		return "otp is not sent";
+    	 else {
+    		 return null;
+    	 }
 		
 	}
      
 	@GetMapping("/verify/{otp}")
      public String getVerify(@PathVariable("otp") String otp) {
 		System.out.println("otp"+otp);
+		System.out.println("email.otp"+email.otp);
 		    try {
 			if(otp.equals(email.otp)) {
 				
