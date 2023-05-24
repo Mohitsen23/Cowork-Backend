@@ -42,13 +42,13 @@ public class SecurityConfig {
 		 
 		 
 	 }
-	 
+//	 ,
 	 @Bean
 	 public SecurityFilterChain seucrityfilter(HttpSecurity http) throws Exception
 	 {
 		  return http.csrf().disable()
 							.authorizeHttpRequests()
-							.requestMatchers("/loginUser","/data","/signup","/verify/{otp}","/getUser/{email}","/updatepassword").permitAll()
+							.requestMatchers("/addJobs","/loginUser","/data","/signup","/verify/{otp}","/getUser/{email}","/updatepassword","/profile").permitAll()
 							.and()
 							.authorizeHttpRequests()
 							.requestMatchers("/**").authenticated()
