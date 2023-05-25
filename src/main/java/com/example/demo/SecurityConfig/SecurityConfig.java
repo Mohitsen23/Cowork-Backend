@@ -48,10 +48,10 @@ public class SecurityConfig {
 	 {
 		  return http.csrf().disable()
 							.authorizeHttpRequests()
-							.requestMatchers("/addJobs","/loginUser","/data","/signup","/verify/{otp}","/getUser/{email}","/updatepassword","/profile").permitAll()
+							.requestMatchers("/**").permitAll()
 							.and()
 							.authorizeHttpRequests()
-							.requestMatchers("/**").authenticated()
+							.requestMatchers("/download/{fileName}").authenticated()
 							.and()
 							.sessionManagement()
 			                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

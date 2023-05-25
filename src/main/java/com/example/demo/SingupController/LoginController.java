@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.DTOClasses.LoginDTO;
 import com.example.demo.DTOClasses.Update;
 import com.example.demo.Models.Signup;
-import com.example.demo.Repository.RepositoryClass;
+import com.example.demo.SecurityConfig.RepositoryClass;
 import com.example.demo.ServiceImplementation.ServiceImplementation;
 import com.example.demo.Services.Service;
 
@@ -44,11 +44,11 @@ private AuthenticationManager authenticationManager;
     String token=null;
     @GetMapping("/getUser/{email}")
     @CrossOrigin(origins = "http://localhost:4200")
-   public String getUser(@PathVariable("email") String email ) {
+   public Signup getUser(@PathVariable("email") String email ) {
     	Signup userdata=serv.getUser(email); 
     	System.out.println("userdata"+userdata);
     	if(userdata!=null) {
-    		return "Valid User";
+    		return userdata;
     	}
     	return null;
    }
@@ -96,17 +96,7 @@ private AuthenticationManager authenticationManager;
    }
    
     
-   @GetMapping("/admin")
-   @PreAuthorize("hasAuthority('Role_Admin')")
-   public String getData1() {
-	   return "Admin Data";
-   }
-   
-   @GetMapping("/user")
-  @PreAuthorize("hasAuthority('Role_User')")
-   public String getData2() {
-	   return "User Data";
-   }
+  
    
    @PostMapping("/data")
    public Signup Signup(@RequestBody LoginDTO login) {
@@ -119,6 +109,7 @@ private AuthenticationManager authenticationManager;
 	   }
    }
    
+ 
    
    
     }

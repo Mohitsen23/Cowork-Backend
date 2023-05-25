@@ -1,6 +1,7 @@
 package com.example.demo.Services;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,15 @@ public interface JobService {
 	 
 	String uploadImage(MultipartFile file, String name, String task, String description, Long price, String link,
 			Signup user) throws IOException;
+
+
+
+
+
+
+	List getJobsByAdmin(Signup id);
+
+
 
 	
 }

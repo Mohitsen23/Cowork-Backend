@@ -24,6 +24,7 @@ public class ProfilePics {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 	 @Lob
+	 private String name;
 	 private byte[] file;
 	 @OneToOne
 	 @JoinColumn(name="User_id")

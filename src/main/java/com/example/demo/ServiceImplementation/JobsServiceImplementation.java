@@ -1,7 +1,7 @@
 package com.example.demo.ServiceImplementation;
 
 import java.io.IOException;
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import com.example.demo.ImageUtils.ImageUtils;
 import com.example.demo.Models.Jobs;
 import com.example.demo.Models.Signup;
 import com.example.demo.Repository.JobsRepo;
-import com.example.demo.SecurityConfig.RepositoryClass;
 import com.example.demo.Services.JobService;
 
 @Service
@@ -36,6 +35,18 @@ if (imageData != null) {
 return "file uploaded successfully : " ;
 }
 return null;
+	}
+
+
+	@Override
+	public List getJobsByAdmin(Signup id) {
+		// TODO Auto-generated method stub
+		
+		List jobs=repo.findBysignup(id);
+		if(jobs!=null) {
+			return jobs;
+		}
+		return null;
 	}
 
 }

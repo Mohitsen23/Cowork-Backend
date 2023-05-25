@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.EmailUtil.EmailConfigure;
 import com.example.demo.Models.Signup;
-import com.example.demo.Repository.RepositoryClass;
+import com.example.demo.SecurityConfig.RepositoryClass;
 import com.example.demo.Services.Service;
 
 import io.jsonwebtoken.Claims;
@@ -79,7 +79,7 @@ public String getTOken(String username) {
 			.setClaims(claims)
 			.setSubject(username)
 			.setIssuedAt(new Date(System.currentTimeMillis()))
-			.setExpiration(new Date(System.currentTimeMillis()+1000*60*10))
+			.setExpiration(new Date(System.currentTimeMillis()+ 600000))
 			.signWith(getKey(),SignatureAlgorithm.HS256).compact();
 			
        }
@@ -114,4 +114,9 @@ public Signup getUser(String email) {
 	    }
 	return null;
 }
+
+
+
+
+
 }

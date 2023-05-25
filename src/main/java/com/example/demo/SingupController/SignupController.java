@@ -17,8 +17,7 @@ import com.example.demo.DTOClasses.OTP;
 import com.example.demo.DTOClasses.SignupDTO;
 import com.example.demo.EmailUtil.EmailConfigure;
 import com.example.demo.Models.Signup;
-//import com.example.demo.Repository.Repository;
-import com.example.demo.Repository.RepositoryClass;
+import com.example.demo.SecurityConfig.RepositoryClass;
 import com.example.demo.Services.Service;
 
 @RestController
@@ -65,16 +64,14 @@ public class SignupController {
 		
 	}
      
-	@GetMapping("/verify/{otp}")
+     @GetMapping("/verify/{otp}")
      public String getVerify(@PathVariable("otp") String otp) {
 		System.out.println("otp"+otp);
 		System.out.println("email.otp"+email.otp);
 		    try {
 			if(otp.equals(email.otp)) {
-				
 				 repo.save(obj);
 				 return "added user";
-				
 			 }
 		} catch (Exception e) {
 			

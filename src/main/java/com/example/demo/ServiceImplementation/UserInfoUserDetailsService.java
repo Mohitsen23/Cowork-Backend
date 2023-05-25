@@ -9,8 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.Models.Signup;
-
-import com.example.demo.Repository.RepositoryClass;
+import com.example.demo.SecurityConfig.RepositoryClass;
 import com.example.demo.SecurityConfig.UserInfoUserDetails;
 
 @Component

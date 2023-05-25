@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.Models.ProfilePics;
 import com.example.demo.Models.Signup;
 import com.example.demo.SecurityConfig.RepositoryClass;
 import com.example.demo.Services.ProfileService;
@@ -25,28 +26,29 @@ public class ProfileController {
 	@Autowired
   private ProfileService ProfileService;
 	@PostMapping("/profile")
-	@CrossOrigin(origins = "/**")
-	public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file,@RequestParam("email")String email) throws IOException {
+	 @CrossOrigin(origins = "http://localhost:4020")
+	public  ProfilePics uploadImage(@RequestParam("file") MultipartFile file,@RequestParam("email")String email) throws IOException {
 		System.out.println("hitting");
 		Signup user=repo.findByEmail(email);
 		
 		if(user!=null) {
 			
-		String uploadImage = ProfileService.uploadImage(file,user);
+			   ProfilePics uploadImage = ProfileService.uploadImage(file,user);
 	
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(uploadImage);
+		return uploadImage;
 		}
 		return null;
 	}
 	
-//	 @GetMapping("/download/{fileName}")
-//		public ResponseEntity<?> downloadImage(@PathVariable String fileName){
-//			byte[] imageData=ProfileService.downloadImage(fileName);
-//			return ResponseEntity.status(HttpStatus.OK)
-//					.contentType(MediaType.valueOf("image/png"))
-//					.body(imageData);
-//			}
-//	
+	 @GetMapping("/download/{fileName}")
+		public ResponseEntity<?> downloadImage(@PathVariable String fileName){
+		 System.out.println("fileName"+fileName);
+			byte[] imageData=ProfileService.downloadImage(fileName);
+			System.out.println("imageData"+imageData);
+			return ResponseEntity.status(HttpStatus.OK)
+					.contentType(MediaType.valueOf("image/png"))
+					.body(imageData);
+			}
+	
 
 }
