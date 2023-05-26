@@ -32,6 +32,8 @@ public class Signup {
 	private String password;
 	
 	private String role;
-	
+
+	@OneToOne(mappedBy = "signup")
+	private ProfilePics userProfile;
 
 }
