@@ -1,19 +1,12 @@
 package com.example.demo.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,7 +26,9 @@ public class Signup {
 	
 	private String role;
 
-	@OneToOne(mappedBy = "signup")
+    @OneToOne
+    @JoinColumn(name="userprofile")
+	@JsonBackReference
 	private ProfilePics userProfile;
 
 }

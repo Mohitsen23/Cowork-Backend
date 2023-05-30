@@ -21,23 +21,31 @@ public class ProfilePicServiceImplementation implements ProfileService {
     private ProfileRepo repository;
 	@Autowired
 	private RepositoryClass repo;
+
+
 	@Override
 	public  ProfilePics uploadImage(MultipartFile file, Signup user) throws IOException {
 
-                           var test = repository.findByUserId(user.getId());
+//							it will info about profile pic is their or not
+		System.out.println("user getting"+user);
+                           var profilePic = repository.findByUserId(user.getId());
+//						   it will give the use details
 						   Signup signup=repo.findByEmail(user.getEmail());
 
-						   if(test==null) {
-							  signup.setUserProfile(test);
-								   System.out.println("gettting test :: " + test);
-								   return repository.save(ProfilePics.builder()
-										   .signup(user)
-										   .name(file.getOriginalFilename())
-										   .file(ImageUtils.compressImage(file.getBytes())).build());
+						   if(profilePic==null) {
+							   var returnProfile =repository.save(ProfilePics.builder()
+									   .signup(user)
+									   .name(file.getOriginalFilename())
+									   .file(ImageUtils.compressImage(file.getBytes())).build());
+							  Signup signup1 = signup;
+							  signup1.setUserProfile(returnProfile);
+							   repo.save(signup1);
+								   System.out.println("gettting test :: " + returnProfile);
+								   return returnProfile;
 
 						   }else {
 							   ProfilePics profilePics= new ProfilePics();
-							   profilePics.setId(test.getId());
+							   profilePics.setId(profilePic.getId());
 							   profilePics.setFile(ImageUtils.compressImage(file.getBytes()));
 							   profilePics.setName(file.getOriginalFilename());
 							   profilePics.setSignup(user);

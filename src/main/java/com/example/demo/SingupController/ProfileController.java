@@ -26,15 +26,13 @@ public class ProfileController {
 	@Autowired
   private ProfileService ProfileService;
 	@PostMapping("/profile")
-	 @CrossOrigin(origins = "http://localhost:4020")
+	 @CrossOrigin(origins = "http://localhost:52901")
 	public  ProfilePics uploadImage(@RequestParam("file") MultipartFile file,@RequestParam("email")String email) throws IOException {
-		System.out.println("hitting");
+		System.out.println("hitting"+email);
 		Signup user=repo.findByEmail(email);
-		
+		System.out.println("helloo");
 		if(user!=null) {
-			
 			   ProfilePics uploadImage = ProfileService.uploadImage(file,user);
-	
 		return uploadImage;
 		}
 		return null;
